@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form action="login" method="post" id="form1"th:object="${project}">
+<label>项目名：</label> <input name="pname" type="text"><br />
+<label>密码：</label> <input name="password" type="password"><br />
+<div th:text="当前用户+${httpsession?.project?.pname}"></div>
+<input type="submit" value="登录"/>
+</form>
+</body>
+</html>

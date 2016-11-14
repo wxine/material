@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+*{ margin:0; padding:0; list-style:none;}
+a{ text-decoration:none;}
+a:hover{ text-decoration:none;}
+.tcdPageCode{padding: 15px 20px;text-align: left;color: #ccc;text-align:center;}
+.tcdPageCode a{display: inline-block;color: #428bca;display: inline-block;height: 25px;	line-height: 25px;	padding: 0 10px;border: 1px solid #ddd;	margin: 0 2px;border-radius: 4px;vertical-align: middle;}
+.tcdPageCode a:hover{text-decoration: none;border: 1px solid #428bca;}
+.tcdPageCode span.current{display: inline-block;height: 25px;line-height: 25px;padding: 0 10px;margin: 0 2px;color: #fff;background-color: #428bca;	border: 1px solid #428bca;border-radius: 4px;vertical-align: middle;}
+.tcdPageCode span.disabled{	display: inline-block;height: 25px;line-height: 25px;padding: 0 10px;margin: 0 2px;	color: #bfbfbf;background: #f2f2f2;border: 1px solid #bfbfbf;border-radius: 4px;vertical-align: middle;}
+</style>
+</head>
+
+<body>
+<div class="all">
+<form action="/index?page=${pageUtil?.page}" method="get">
+<input name="keyword" type="text">
+<input type="submit" value="搜索"/>
+</form>
+<div th:each="material,materialStat:${pageUtil.pagelist}">
+		<p>
+		<div th:text="材料名称：+${material?.name} "></div>
+		<div th:text="材料参数规格：+${material?.parameter}"></div>
+        <div th:text="存放地点：+${material?.location}"></div>
+        <div th:text="${material?.ctime}"></div>
+		<a th:href="@{/material_delete(id=${material.id})}">删除材料</a> 
+        <a th:href="@{/material_update(id=${material.id})}">修改信息</a>
+		<a th:href="@{/record_save(materialid=${material.id})}">领取材料</a>
+       
+		</p><br/> 
+	</div>
+	<div><a href ="/login">登录</a></div><br/>
+	<div><a href ="/project">项目列表</a></div><br/>
+	 <div th:text="当前用户：+${session?.project?.pname}"></div>
+	</p>
+</div>	
+		
+    	<div th:text="当前页码：+${pageUtil?.page} "></div>
+        <div th:text="共+${pageUtil?.pagetotal}+页 "></div>
+		<div class="tcdPageCode"></div>
+
+<form action="/material_save" method="post" id="form1"th:object="${material}">
+<label>材料名称：</label> <input name="name" type="text"><br />
+<label>材料参数规格：</label> <input name="parameter" type="text"><br />
+<label>存放地点：</label> <input name="location" type="text"><br />
+<input type="submit" value="提交"/>
+</form>
+<input id="keyword" type="hidden" th:value="${keyword}">
+</body>
+<script src="../static/js/jquery-3.1.0.min.js" th:src="@{/js/jquery-3.1.0.min.js}"></script>
+<script src="../static/js/jquery.page.js" th:src="@{/js/jquery.page.js}"></script>
+<script th:inline="javascript">
+
+
+        /*<![CDATA[*/
+$(function(){
+	/*$(document).on("click", "#add", function(){
+		var url = $("#form1").prop("action");
+		var data = $("#form1").serialize();
+		
+		$.post(url, data, function(result){
+			//console.log(json);
+			$(".all").append(result);
+		}, "html");
+	});*/
+        	/* var pageCount = [[${pageUtil?.pagetotal}]];//总页码
+            var currentPage = Number([[${pageUtil?.page}]]);//当前页码
+            //var sortid = [[${sortId}]];
+            //var showAll = [[${showAll}]];
+            var html = "";
+            var html_2 = "";
+            //var companyCode = [[${code}]];
+	       // var checkCompany = new Array();
+	        
+            if (pageCount > 1) {
+                if (currentPage >= pageCount) {//如果当前页大于等于总页码，即最后一页，就显示上一页
+                    var link_Url = "<li><a href=/index?page=" + (currentPage - 1) + ">上一页</a></li>";
+                    html += link_Url;
+                } else if (currentPage <= 1) {//如果当前页小于等于1，即第一页，显示下一页
+                    var link_Url = "<li><a href=/index?page=" + (currentPage + 1) + ">下一页</a></li>";
+                    html += link_Url;
+                } else {
+                    var link_Url = "<li><a href=/index?page=" + (currentPage - 1) + ">上一页</a></li>";
+                    html += link_Url;
+                    var link_Url = "<li><a href=/index?page=" + (currentPage + 1) + ">下一页</a></li>";
+                    html += link_Url;
+                }
+               for (var i = 0; i < pageCount; i++) {
+					var select_Url = "<a href=/index?page=" +(i + 1) + ">"+ (i + 1) +"</a>&nbsp;";
+                    html_2 += select_Url;
+                }
+                $("#select_link")[0].innerHTML = html_2;
+            }
+             $("#link")[0].innerHTML = html;  
+	       
+            //console.log(checkCompany); */
+
+	$(".tcdPageCode").createPage({
+        pageCount:[[${pageUtil?.pagetotal}]],
+        current:[[${pageUtil?.page}]],
+		url: "/index?page=",
+        backFn:function(p){
+            console.log(p);
+        }
+    });
+          
+		 });
+		 
+        
+
+        /*]]>*/
+</script>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>Insert title here</title>
+</head>
+<body>
+<form action="material_updates" method="post">
+<label>材料名称：</label>
+<input name="name" type="text" th:value="${update?.name}"><br/>
+<label>参数规格：</label>
+<input name="parameter" type="text" th:value="${update?.parameter}"><br/>
+<label>存放地点：</label>
+<input name="location" type="text" th:value="${update?.location}"><br/>
+<input name="id" type="hidden" th:value="${update?.id}">
+<input name="submit" type="submit" value="修改">
+</form>
+</body>
+</html>
