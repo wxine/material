@@ -33,7 +33,6 @@ public class MaterialDao {
 
 	public List<Material> findAll() {
 		DetachedCriteria dc = DetachedCriteria.forClass(Material.class);
-		// dc.add(Restrictions.eq("record", value))
 		Criteria criteria = dc.getExecutableCriteria(getSession());
 		List<Material> list = criteria.list();
 
@@ -86,6 +85,7 @@ public class MaterialDao {
 			Disjunction dis = Restrictions.disjunction();
 			dis.add(Property.forName("name").like(keyword, MatchMode.ANYWHERE));
 			dis.add(Property.forName("location").like(keyword, MatchMode.ANYWHERE));
+			dis.add(Property.forName("parameter").like(keyword, MatchMode.ANYWHERE));
 			dc.add(dis);
 		}
 		Criteria criteria = dc.getExecutableCriteria(getSession());

@@ -1,6 +1,7 @@
 package com.test.material.web;
 
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import javax.annotation.Resource;
@@ -33,6 +34,10 @@ public class MaterialController {
 		}
 		materialDao.Infopage(keyword);
 		PageUtil pageUtil = materialDao.queryByPage(page, keyword);
+		List<Material> plist = pageUtil.getPagelist();
+		for(Material aa :plist){
+			System.out.println(aa.getId());
+		}
 		m.addAttribute("pageUtil", pageUtil);
 		m.addAttribute("keyword", keyword);
 		return "index";

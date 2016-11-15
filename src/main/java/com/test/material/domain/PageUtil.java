@@ -8,9 +8,9 @@ public class PageUtil {
 	private int pagesize = PAGESIZE;// 每页显示
 	private int pagetotal;// 总页数
 	private int infototal;// 数据总数
-	private List<PageUtil> pagelist;
+	private List<Material> pagelist;
 
-	public PageUtil(int page, int pagesize, int pagetotal, int infototal, List<PageUtil> pagelist) {
+	public PageUtil(int page, int pagesize, int pagetotal, int infototal, List<Material> pagelist) {
 		this.page = page;
 		this.pagesize = pagesize;
 		this.pagetotal = pagetotal;
@@ -61,12 +61,12 @@ public class PageUtil {
 		this.infototal = infototal;
 	}
 
-	public List<PageUtil> getPagelist() {
+	public List<Material> getPagelist() {
 		 
 		return pagelist;
 	}
 
-	public void setPagelist(List<PageUtil> pagelist) {
+	public void setPagelist(List<Material> pagelist) {
 		this.pagelist = pagelist;
 	}
 
