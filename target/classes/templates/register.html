@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-<form action="register" method="post" id="form1"th:object="${project}">
-<label>项目名：</label> <input name="pname" type="text"><br />
-<label>密码：</label> <input name="password" type="password"><br />
+<form action="register" method="post" id="form1" th:object="${project}">
+<label>项目名：</label> <input name="pname" type="text" th:field="*{pname}"><br />
+<div th:if="${#fields.hasErrors('pname')}" th:errors="*{pname}">Pname Error</div>
+<label>密码：</label> <input name="password" type="password" th:field="*{password}"><br />
+<div th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</div>
 <input type="submit" value="注册"/>
 </form>
 </body>

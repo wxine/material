@@ -40,9 +40,7 @@ public class RecordService {
 	public void seondsave(String materialid) {
 		Material material = materialDao.findById(materialid);
 		Record record = recordDao.findBymaterial(material);
-		Date nowtime = new Date();
-		record.setSecondtime(nowtime);
+		record.setSecondtime(null);
 		recordDao.update(record);
 	}
-
 }

@@ -1,5 +1,6 @@
 package com.test.material.repository;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.test.material.domain.Material;
+import com.test.material.domain.Project;
 import com.test.material.domain.Record;
 
 @Component

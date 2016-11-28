@@ -18,7 +18,7 @@ public class Project {
 	private String id;
 	@NotEmpty(message = "项目名不能为空")
 	private String pname;
-	@NotEmpty
+	@NotEmpty(message = "密码不能为空")
 	private String password;
 	private Date ctime;
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE, mappedBy = "project")

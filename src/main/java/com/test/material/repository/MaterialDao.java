@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.hibernate.Criteria;
+import org.hibernate.Filter;
 import org.hibernate.Session;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Disjunction;
@@ -59,6 +60,10 @@ public class MaterialDao {
 	}
 
 	public PageUtil queryByPage(int page, String keyword) {
+		Session session = getSession();
+		session.disableFilter("cmperms");
+		Filter filter = session.enableFilter("cmperms").setParameter("st", "yes");
+
 		PageUtil pu = new PageUtil();
 		DetachedCriteria dc = DetachedCriteria.forClass(Material.class);
 		if (keyword != null) {
@@ -69,13 +74,16 @@ public class MaterialDao {
 			dc.add(dis);
 		}
 		dc.addOrder(Order.desc("ctime"));
-		Criteria criteria = dc.getExecutableCriteria(getSession());
+		Criteria criteria = dc.getExecutableCriteria(session);
+		
 		pu.setPage(page);
 		criteria.setFirstResult((page - 1) * pu.getPagesize());
 		criteria.setMaxResults(pu.getPagesize());
 		pu.setPagelist(criteria.list());
 		pu.setInfototal(Infopage(keyword).intValue());
 		pu.setPagetotal(pu.Pages());
+		
+		
 		return pu;
 	}
 
@@ -93,4 +101,5 @@ public class MaterialDao {
 		Long count = (Long) criteria.uniqueResult();
 		return count;
 	}
+	
 }

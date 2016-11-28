@@ -7,8 +7,7 @@
 
 <body>
 <div th:each="record,recordStat : ${aaa}"th:object="${record}">
-	<div th:unless="${record?.secondtime}" th:text="材料名称：+${record?.material.name}"></div>
-	<a th:unless="${record?.secondtime}" th:href="@{/record_seondsave(materialid=${record?.material.id})}">归还材料</a><p/>
-	</div>
+	<div th:if="${record?.secondtime}" th:text="材料名称：+${record?.material.name}"></div>
+	<a th:if="${record?.secondtime}"  th:href="@{/record_seondsave(materialid=${record?.material.id})}">归还材料</a><p/>
 </body>
 </html>

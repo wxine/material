@@ -42,14 +42,14 @@ public class ProjectController {
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
-	public String register() {
+	public String register(Project project) {
 		return "register";
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String register(@Valid Project project, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
-			return "redirect：/project";
+			return "register";
 		}
 		Date nowtime = new Date();
 		project.setCtime(nowtime);

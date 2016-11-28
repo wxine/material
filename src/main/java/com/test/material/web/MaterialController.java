@@ -1,13 +1,16 @@
 package com.test.material.web;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,17 +37,17 @@ public class MaterialController {
 		}
 		materialDao.Infopage(keyword);
 		PageUtil pageUtil = materialDao.queryByPage(page, keyword);
-		List<Material> plist = pageUtil.getPagelist();
-		for(Material aa :plist){
-			System.out.println(aa.getId());
-		}
+
 		m.addAttribute("pageUtil", pageUtil);
 		m.addAttribute("keyword", keyword);
 		return "index";
 	}
 
 	@RequestMapping(value = "/material_save", method = RequestMethod.POST) // 保存
-	public String save(Material material) {
+	public String save(@Valid Material material,BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
+			return "redirect:/index";
+		}
 		Date nowtime = new Date();
 		material.setCtime(nowtime);
 		material.setId(UUID.randomUUID().toString().replace("-", ""));

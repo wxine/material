@@ -18,7 +18,7 @@ public class Record {
 	@ManyToOne
 	@JoinColumn(name = "materialid")
 	private Material material;
-	private Date Secondtime = null;
+	private String Secondtime = "yes";
 
 	private Date Recordctime;
 
@@ -26,7 +26,7 @@ public class Record {
 
 	}
 
-	public Record(String id, Project project, Material material, Date secondtime, Date recordctime) {
+	public Record(String id, Project project, Material material, String secondtime, Date recordctime) {
 		this.id = id;
 		this.project = project;
 		this.material = material;
@@ -66,11 +66,12 @@ public class Record {
 		Recordctime = recordctime;
 	}
 
-	public Date getSecondtime() {
+	public String getSecondtime() {
 		return Secondtime;
 	}
 
-	public void setSecondtime(Date secondtime) {
+	public void setSecondtime(String secondtime) {
 		Secondtime = secondtime;
 	}
+
 }
